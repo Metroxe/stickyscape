@@ -1,0 +1,76 @@
+body {
+    background-color: #333;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 5px;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+        padding: 0 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+        padding: 0 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+        padding: 0 15px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+        padding: 0 15px;
+    }
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    border: 5px solid #444;
+}
+
+.progress-bar {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    margin: 0 auto; /* Center align the progress bar */
+}
+
+.level-block {
+    flex: 1;
+    margin: 1px;
+    background-color: #555;
+    border: 1px solid #444;
+    border-radius: 3px;
+}
+
+.level-block.filled {
+    background-color: #4caf50;
+}
+
+.level-info {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    color: white;
+}

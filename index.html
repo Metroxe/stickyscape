@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="container">
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="level-info">
+            <span id="current-level">Level: 0</span> / <span id="target-level">99</span>
+        </div>
+    </section>
+
+    <script>
+        function updateProgressBar(level) {
+            const progressBar = document.getElementById('progress-bar');
+            const currentLevel = document.getElementById('current-level');
+            const levelBlocks = progressBar.children;
+            for (let i = 0; i < levelBlocks.length; i++) {
+                if (i < level) {
+                    levelBlocks[i].classList.add('filled');
+                } else {
+                    levelBlocks[i].classList.remove('filled');
+                }
+            }
+            currentLevel.textContent = 'Level: ' + level;
+        }
+
+        // Initialize the progress bar with 99 blocks
+        function initializeProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            for (let i = 0; i < 99; i++) {
+                const block = document.createElement('div');
+                block.classList.add('level-block');
+                progressBar.appendChild(block);
+            }
+        }
+
+        // Initialize and update the progress bar to level 7
+        initializeProgressBar();
+        updateProgressBar(7);
+    </script>
+</body>
+</html>
