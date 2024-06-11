@@ -81,3 +81,35 @@ body {
     margin-top: 10px;
     color: white;
 }
+
+.timeline-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Adjusted for larger images */
+    gap: 10px;
+    margin-top: 20px;
+    border: 1px solid #444; /* Border around the grid */
+    padding: 10px;
+}
+
+.timeline-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    border: 1px solid #444; /* Border around each entry */
+    padding: 10px;
+}
+
+.timeline-image {
+    width: 300px; /* Larger images */
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+#next-level-elapsed-time {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #4caf50; /* Green color for elapsed time */
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Progress Bar</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="entries.js"></script>
 </head>
 <body>
     <section class="container">
@@ -13,16 +14,19 @@
         </div>
         <div class="level-info">
             <span id="current-level">Level: 0</span> / <span id="target-level">99</span>
+            <div id="elapsed-time"></div>
         </div>
         <div class="timer-info">
             <span id="timer"></span>
         </div>
+        <section class="timeline-container" id="timeline-container"></section>
     </section>
 
     <script>
         function updateProgressBar(level) {
             const progressBar = document.getElementById('progress-bar');
             const currentLevel = document.getElementById('current-level');
+            const elapsedTimeElement = document.getElementById('elapsed-time');
             const levelBlocks = progressBar.children;
             for (let i = 0; i < levelBlocks.length; i++) {
                 if (i < level) {
@@ -62,13 +66,89 @@
             setInterval(updateTimer, 1000);
         }
 
-        // Initialize the progress bar and timer
+        function initializeTimeline() {
+            const timelineContainer = document.getElementById('timeline-container');
+            for (let i = 2; i < 100; i++) { // Start at level 2
+                const entry = entries[i - 1];
+                const entryDiv = document.createElement('div');
+                entryDiv.classList.add('timeline-entry');
+
+                const levelLabel = document.createElement('span');
+                levelLabel.textContent = `Level ${i}`;
+                entryDiv.appendChild(levelLabel);
+
+                if (entry) {
+                    const img = document.createElement('img');
+                    img.src = `images/${i}.jpeg`;
+                    img.alt = `Level ${i}`;
+                    img.classList.add('timeline-image');
+                    entryDiv.appendChild(img);
+
+                    const dateSpan = document.createElement('span');
+                    dateSpan.textContent = entry.timestamp.toDateString();
+                    entryDiv.appendChild(dateSpan);
+
+                    if (i > 1) {
+                        const prevEntry = entries[i - 2];
+                        const duration = Math.floor((entry.timestamp - prevEntry.timestamp) / (1000 * 60 * 60 * 24));
+                        const durationSpan = document.createElement('span');
+                        durationSpan.textContent = `${duration} days`;
+                        entryDiv.appendChild(durationSpan);
+                    }
+                }
+
+                timelineContainer.appendChild(entryDiv);
+            }
+
+            // Add the current level elapsed time to the next level's grid spot after the last entry
+            const nextLevelDiv = document.createElement('div');
+            nextLevelDiv.classList.add('timeline-entry');
+            const nextLevelLabel = document.createElement('span');
+            nextLevelLabel.textContent = `Next Level Elapsed Time:`;
+            nextLevelDiv.appendChild(nextLevelLabel);
+
+            const nextLevelElapsedTime = document.createElement('span');
+            nextLevelElapsedTime.id = 'next-level-elapsed-time';
+            nextLevelDiv.appendChild(nextLevelElapsedTime);
+
+            // Append the next level elapsed time div after the last entry
+            const lastEntryIndex = Math.min(entries.length, 98); // Ensure we don't go beyond level 99
+            const lastEntryDiv = timelineContainer.children[lastEntryIndex - 1];
+            lastEntryDiv.insertAdjacentElement('afterend', nextLevelDiv);
+        }
+
+        // Initialize the progress bar, timer, and timeline
         initializeProgressBar();
-        updateProgressBar(7);
+        updateProgressBar(entries.length);
+        initializeTimeline();
 
         // Start the timer from 12/10/2023 6:43PM
         const startTime = new Date('December 10, 2023 18:43:00');
         startTimer(startTime);
+
+        // Update the next level elapsed time
+        function updateNextLevelElapsedTime() {
+            const nextLevelElapsedTime = document.getElementById('next-level-elapsed-time');
+            const level = entries.length;
+            if (level > 0 && level <= entries.length) {
+                const startTime = entries[entries.length - 1].timestamp;
+                const currentTime = new Date();
+                const elapsed = currentTime - startTime;
+
+                const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+                nextLevelElapsedTime.textContent = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+            } else {
+                nextLevelElapsedTime.textContent = '';
+            }
+        }
+
+        // Update the next level elapsed time every second
+        updateNextLevelElapsedTime();
+        setInterval(updateNextLevelElapsedTime, 1000);
     </script>
 </body>
 </html>
