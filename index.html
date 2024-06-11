@@ -14,6 +14,9 @@
         <div class="level-info">
             <span id="current-level">Level: 0</span> / <span id="target-level">99</span>
         </div>
+        <div class="timer-info">
+            <span id="timer"></span>
+        </div>
     </section>
 
     <script>
@@ -31,7 +34,6 @@
             currentLevel.textContent = 'Level: ' + level;
         }
 
-        // Initialize the progress bar with 99 blocks
         function initializeProgressBar() {
             const progressBar = document.getElementById('progress-bar');
             for (let i = 0; i < 99; i++) {
@@ -41,9 +43,32 @@
             }
         }
 
-        // Initialize and update the progress bar to level 7
+        function startTimer(startTime) {
+            const timerElement = document.getElementById('timer');
+            function updateTimer() {
+                const now = new Date();
+                const elapsed = now - startTime;
+
+                const years = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 365));
+                const months = Math.floor((elapsed % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+                const days = Math.floor((elapsed % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+                timerElement.textContent = `Elapsed Time: ${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // Initialize the progress bar and timer
         initializeProgressBar();
         updateProgressBar(7);
+
+        // Start the timer from 12/10/2023 6:43PM
+        const startTime = new Date('December 10, 2023 18:43:00');
+        startTimer(startTime);
     </script>
 </body>
 </html>
