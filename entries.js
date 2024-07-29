@@ -19,5 +19,8 @@ const entries = [
     },
     {
         timestamp: new Date('May 26, 2024'),
-    }
+    },
+    {
+        timestamp: new Date('July 29, 2024'),
+    },
 ]
