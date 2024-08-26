@@ -26,4 +26,7 @@ const entries = [
     {
         timestamp: new Date('August 15, 2024'),
     },
+    {
+        timestamp: new Date('August 23, 2024'),
+    },
 ]
