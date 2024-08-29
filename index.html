@@ -103,61 +103,63 @@
          */
         function initializeTimeline() {
             const timelineContainer = document.getElementById('timeline-container');
-            for (let i = 1; i <= entries.length; i++) {
-                const entry = entries[i - 1];
+            let levelCount = 0;
+
+            entries.forEach((entry, index) => {
                 const entryDiv = document.createElement('div');
                 entryDiv.classList.add('timeline-entry');
-
-                const levelLabel = document.createElement('h2');
-                levelLabel.textContent = `Level ${i}`;
-                entryDiv.appendChild(levelLabel);
-
-                if (entry.image) {
-                    const img = document.createElement('img');
-                    img.src = `images/${entry.image}`;
-                    img.alt = `Level ${i}`;
-                    img.classList.add('timeline-image');
-                    entryDiv.appendChild(img);
-                } else {
-                    const startMessage = document.createElement('p');
-                    startMessage.textContent = "This was the start of the journey!";
-                    entryDiv.appendChild(startMessage);
-                }
 
                 const dateSpan = document.createElement('p');
                 dateSpan.textContent = entry.timestamp.toDateString();
                 entryDiv.appendChild(dateSpan);
 
-                if (i > 1) {
-                    const prevEntry = entries[i - 2];
-                    const duration = Math.floor((entry.timestamp - prevEntry.timestamp) / (1000 * 60 * 60 * 24));
-                    const durationSpan = document.createElement('p');
-                    durationSpan.textContent = `Time to level up: ${duration} days`;
-                    entryDiv.appendChild(durationSpan);
+                if (entry.image !== undefined) {
+                    levelCount++;
+                    const levelLabel = document.createElement('h2');
+                    levelLabel.textContent = `Level ${levelCount}`;
+                    entryDiv.appendChild(levelLabel);
+
+                    if (entry.image) {
+                        const img = document.createElement('img');
+                        img.src = `images/${entry.image}`;
+                        img.alt = `Level ${levelCount}`;
+                        img.classList.add('timeline-image');
+                        entryDiv.appendChild(img);
+                    } else {
+                        const startMessage = document.createElement('p');
+                        startMessage.textContent = "This was the start of the journey!";
+                        entryDiv.appendChild(startMessage);
+                    }
+
+                    if (levelCount > 1) {
+                        const prevLevelEntry = entries.filter(e => e.image !== undefined)[levelCount - 2];
+                        const duration = Math.floor((entry.timestamp - prevLevelEntry.timestamp) / (1000 * 60 * 60 * 24));
+                        const durationSpan = document.createElement('p');
+                        durationSpan.textContent = `Time to level up: ${duration} days`;
+                        entryDiv.appendChild(durationSpan);
+                    }
+                } else {
+                    const textContent = document.createElement('p');
+                    textContent.textContent = entry.content;
+                    entryDiv.appendChild(textContent);
                 }
 
                 timelineContainer.appendChild(entryDiv);
-            }
-
-            // Remove the next level elapsed time element
-            // The following lines have been removed:
-            // const nextLevelElapsedTime = document.createElement('p');
-            // nextLevelElapsedTime.id = 'next-level-elapsed-time';
-            // nextLevelElapsedTime.textContent = 'Time since last level:';
-            // timelineContainer.lastChild.appendChild(nextLevelElapsedTime);
+            });
         }
 
         // Initialize the progress bar, timer, and timeline
         initializeProgressBar();
-        updateProgressBar(entries.length);
+        updateProgressBar(entries.filter(entry => entry.image !== undefined).length);
         initializeTimeline();
 
         // Update the floating timer every second
         function updateFloatingTimer() {
             const floatingTimer = document.getElementById('floating-timer');
-            const level = entries.length;
+            const levelEntries = entries.filter(entry => entry.image !== undefined);
+            const level = levelEntries.length;
             if (level > 0) {
-                const startTime = entries[level - 1].timestamp;
+                const startTime = levelEntries[level - 1].timestamp;
                 const currentTime = new Date();
                 const elapsed = currentTime - startTime;
 

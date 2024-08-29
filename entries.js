@@ -32,11 +32,15 @@ const entries = [
         image: '8.jpeg'
     },
     {
+        timestamp: new Date('August 12, 2024'),
+        content: 'Decided to start logging text posts, to add commentary to how efficient I am feeling. Around this date, I also changed the board design from "Delegate, Business, Code, Personal" to "Today, Tomorrow, This Month, This Year, Anytime".'
+    },
+    {
         timestamp: new Date('August 15, 2024'),
         image: '9.jpeg'
     },
     {
         timestamp: new Date('August 23, 2024'),
         image: '10.jpeg'
-    },
+    }
 ]

@@ -2,11 +2,12 @@ body {
     background-color: #333;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 60px; /* Add this line */
 }
 
 .container {
     width: 100%;
-    max-width: 800px; /* Reduced from 500px */
+    max-width: 800px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -25,19 +26,19 @@ body {
 
 @media (min-width: 992px) {
     .container {
-        max-width: 800px; /* Reduced from 960px */
+        max-width: 800px;
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 800px; /* Reduced from 1140px */
+        max-width: 800px;
     }
 }
 
 .progress-container {
     width: 100%;
-    max-width: 1140px; /* Added to maintain original width */
+    max-width: 1140px;
     margin: 0 auto 10px;
     display: flex;
     justify-content: center;
@@ -48,7 +49,7 @@ body {
     display: flex;
     width: 100%;
     height: 30px;
-    margin: 0 auto; /* Center align the progress bar */
+    margin: 0 auto;
 }
 
 .level-block {
@@ -87,12 +88,11 @@ body {
 .timeline-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px; /* Reduced from 20px */
     margin-top: 20px;
-    padding: 20px;
+    padding: 10px; /* Reduced from 20px */
     max-width: 600px;
     margin: 20px auto 0;
-    // Removed the border property
 }
 
 .timeline-entry {
@@ -100,29 +100,29 @@ body {
     flex-direction: column;
     align-items: center;
     color: white;
-    border: 1px solid #444;
-    padding: 20px;
-    background-color: #444;
-    border-radius: 10px;
+    padding: 15px; /* Reduced from 20px */
+    background-color: #3a3a3a; /* Slightly lighter than the body background */
+    border: none; /* Removed border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
 
 .timeline-image {
     width: 100%;
-    max-width: 400px; /* Reduced from 500px */
+    max-width: 300px; /* Reduced from 400px */
     height: auto;
     object-fit: cover;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduced from 15px */
     border-radius: 5px;
 }
 
 .timeline-entry h2 {
-    margin-bottom: 15px;
-    font-size: 24px;
+    margin-bottom: 10px; /* Reduced from 15px */
+    font-size: 20px; /* Reduced from 24px */
 }
 
 .timeline-entry p {
     margin: 5px 0;
-    font-size: 16px;
+    font-size: 14px; /* Reduced from 16px */
 }
 
 #next-level-elapsed-time {
@@ -146,5 +146,3 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
-
-/* You can remove or comment out the old .timer-info styles */
