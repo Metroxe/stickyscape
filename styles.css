@@ -2,49 +2,44 @@ body {
     background-color: #333;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 60px; /* Add this line */
 }
 
 .container {
     width: 100%;
-    max-width: 500px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 5px;
+    padding: 0 15px;
 }
 
 @media (min-width: 576px) {
     .container {
         max-width: 540px;
-        padding: 0 10px;
     }
 }
 
 @media (min-width: 768px) {
     .container {
         max-width: 720px;
-        padding: 0 15px;
     }
 }
 
 @media (min-width: 992px) {
     .container {
-        max-width: 960px;
-        padding: 0 15px;
+        max-width: 800px;
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 1140px;
-        padding: 0 15px;
+        max-width: 800px;
     }
 }
 
 .progress-container {
     width: 100%;
-    background-color: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 10px;
+    max-width: 1140px;
+    margin: 0 auto 10px;
     display: flex;
     justify-content: center;
     border: 5px solid #444;
@@ -54,7 +49,7 @@ body {
     display: flex;
     width: 100%;
     height: 30px;
-    margin: 0 auto; /* Center align the progress bar */
+    margin: 0 auto;
 }
 
 .level-block {
@@ -91,12 +86,13 @@ body {
 }
 
 .timeline-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Adjusted for larger images */
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduced from 20px */
     margin-top: 20px;
-    border: 1px solid #444; /* Border around the grid */
-    padding: 10px;
+    padding: 10px; /* Reduced from 20px */
+    max-width: 600px;
+    margin: 20px auto 0;
 }
 
 .timeline-entry {
@@ -104,20 +100,49 @@ body {
     flex-direction: column;
     align-items: center;
     color: white;
-    border: 1px solid #444; /* Border around each entry */
-    padding: 10px;
+    padding: 15px; /* Reduced from 20px */
+    background-color: #3a3a3a; /* Slightly lighter than the body background */
+    border: none; /* Removed border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
 
 .timeline-image {
-    width: 300px; /* Larger images */
-    height: 300px;
+    width: 100%;
+    max-width: 300px; /* Reduced from 400px */
+    height: auto;
     object-fit: cover;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 10px; /* Reduced from 15px */
+    border-radius: 5px;
+}
+
+.timeline-entry h2 {
+    margin-bottom: 10px; /* Reduced from 15px */
+    font-size: 20px; /* Reduced from 24px */
+}
+
+.timeline-entry p {
+    margin: 5px 0;
+    font-size: 14px; /* Reduced from 16px */
 }
 
 #next-level-elapsed-time {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #4caf50; /* Green color for elapsed time */
+    font-size: 18px;
+    margin-top: 15px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.floating-timer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
