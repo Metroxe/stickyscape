@@ -46,5 +46,9 @@ const entries = [
     {
         timestamp: new Date('September 17, 2024'),
         image: '11.jpeg'
+    },
+    {
+        timestamp: new Date('October 22, 2024'),
+        image: '12.jpeg'
     }
 ]
